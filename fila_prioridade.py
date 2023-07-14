@@ -81,4 +81,7 @@ class FilaPrioridade:
     # se a fila de prioridade estiver vazia, retorna ZERO
     def size(self) -> int:
         # implementação do método
-        pass
+        if self.is_empty() == True: 
+            return 0
+        else:
+            return self.__qtdItens
