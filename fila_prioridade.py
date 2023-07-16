@@ -41,25 +41,47 @@ class FilaPrioridade:
         # implementação do método
         if self.is_full():
             raise Exception("Fila de prioridade está cheia")
-        
-        novo_no = No(valor)
+
+        novo_no = No(valor, prioridade)
 
         if self.is_empty():
-            novo_no.prioridade = valor
-            novo_no.prox = None
+            self.__inicio = novo_no 
+            print(f'O nó atual no vazio é: {self.__inicio}')
+
         
         else: 
-            no_atual = novo_no  
-            anterior = None
 
-            while no_atual.prox != None and valor <= no_atual.prioridade:
-                anterior = no_atual
-                no_atual = anterior.prox
+            if prioridade >= self.__inicio.prioridade:
+                novo_no.prox = self.__inicio
+                self.__inicio = novo_no
+                print(f'Esse caso é aquele outro {self.__inicio}')
+
+            else:
+                no_atual = self.__inicio 
+                anterior = None
+
+                print(f'O nó atual antes do while é: {no_atual}')
             
-            novo_no = no_atual
-            novo_no.prioridade = valor
-            novo_no.prox = None
 
+                while no_atual.prox != None and prioridade <= no_atual.prioridade:
+                    anterior = no_atual
+                    no_atual = anterior.prox
+
+                if novo_no.prioridade >= no_atual.prioridade:
+                    novo_no.prox = no_atual
+                    anterior.prox = novo_no
+                else:                        
+                    no_atual.prox = novo_no 
+                    novo_no.prox = None
+                
+
+                print(f'O nó atual depois do while é: {no_atual}')
+                print(f'O nó anterior depois do while é: {anterior}')
+                print(f'O anterior.prox depois do while é: {anterior.prox}')
+
+
+        self.__qtdItens+=1
+        return True 
     
     # remove o primeiro item da fila de prioridade, caso não esteja vazia, e retorna o Nó
     # se a fila de prioridade estiver vazia, lança uma exceção: raise Exception("mensagem de erro")
