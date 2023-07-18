@@ -77,7 +77,7 @@ class FilaPrioridade:
 
 
 
-                if novo_no.prioridade >= no_atual.prioridade:
+                if novo_no.prioridade > no_atual.prioridade:
                     novo_no.prox = no_atual
                     anterior.prox = novo_no
 
