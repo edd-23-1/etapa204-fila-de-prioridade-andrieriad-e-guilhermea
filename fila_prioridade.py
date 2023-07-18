@@ -53,10 +53,16 @@ class FilaPrioridade:
         
         else: 
 
-            if prioridade >= self.__inicio.prioridade:
+            # verifica se a prioridade do elemento inserido é maior ou igual 
+            # do que a prioridade do elemento do início 
+            if prioridade > self.__inicio.prioridade:
                 novo_no.prox = self.__inicio
                 self.__inicio = novo_no
                 print(f'Esse caso é aquele outro {self.__inicio}')
+
+            elif prioridade == self.__inicio.prioridade:
+                novo_no.prox = self.__inicio.prox
+                self.__inicio.prox = novo_no
 
             else:
                 no_atual = self.__inicio 
@@ -69,9 +75,16 @@ class FilaPrioridade:
                     anterior = no_atual
                     no_atual = anterior.prox
 
+
+
                 if novo_no.prioridade >= no_atual.prioridade:
                     novo_no.prox = no_atual
                     anterior.prox = novo_no
+
+                elif prioridade == no_atual.prioridade:
+                    novo_no.prox = no_atual.prox
+                    no_atual.prox = novo_no
+
                 else:                        
                     no_atual.prox = novo_no 
                     novo_no.prox = None
@@ -79,7 +92,7 @@ class FilaPrioridade:
 
                 print(f'O nó atual depois do while é: {no_atual}')
                 print(f'O nó anterior depois do while é: {anterior}')
-                print(f'O anterior.prox depois do while é: {anterior.prox}')
+                #print(f'O anterior.prox depois do while é: {anterior.prox}')
 
 
         self.__qtdItens+=1
